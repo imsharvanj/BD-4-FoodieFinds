@@ -16,13 +16,18 @@ class EntityNotFoundError extends Error {
   }
 }
 
-// Connect to SQLite database
 let db;
+
 (async () => {
-  db = await open({
-    filename: './foodie-finds/database.sqlite',
-    driver: sqlite3.Database,
-  });
+  try {
+    db = await open({
+      filename: './foodie-finds/database.sqlite',
+      driver: sqlite3.Database,
+    });
+    console.log('Database connection established successfully');
+  } catch (error) {
+    console.error('Failed to connect to the database:', error.message);
+  }
 })();
 
 async function fetchAllRestaurants() {
