@@ -3,6 +3,7 @@ const { resolve } = require('path');
 let cors = require('cors');
 const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -21,7 +22,7 @@ let db;
 (async () => {
   try {
     db = await open({
-      filename: './foodie-finds/database.sqlite',
+      filename: path.join(__dirname, './foodie-finds/database.sqlite'),
       driver: sqlite3.Database,
     });
     console.log('Database connection established successfully');
